@@ -4,55 +4,55 @@ const NEXT_PUBLIC_SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 const NEXT_PUBLIC_SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? "";
 
 const supabase = createClient(
-	NEXT_PUBLIC_SUPABASE_URL,
-	NEXT_PUBLIC_SUPABASE_KEY
+  NEXT_PUBLIC_SUPABASE_URL,
+  NEXT_PUBLIC_SUPABASE_KEY,
 );
 
 export const uploadFile = async (file: File) => {
-	try {
-		const filename = `${Date.now()}.png`;
+  try {
+    const filename = `${Date.now()}.png`;
 
-		const { error } = await supabase.storage
-			.from("ImageUpload")
-			.upload(`public/airplanes/${filename}`, file, {
-				cacheControl: "3600",
-				upsert: false,
-			});
+    const { error } = await supabase.storage
+      .from("Upload Image")
+      .upload(`public/gallery/${filename}`, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
 
-		if (error) {
-			throw new Error(error.message);
-		}
+    if (error) {
+      throw new Error(error.message);
+    }
 
-		return filename;
-	} catch (error) {
-		console.log(error);
-
-		return error;
-	}
+    return filename;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const getUrlFile = (filename: string) => {
-	const { data } = supabase.storage
-		.from("ImageUpload")
-		.getPublicUrl(`public/airplanes/${filename}`);
+  const { data } = supabase.storage
+    .from("Upload Image")
+    .getPublicUrl(`public/gallery/${filename}`);
 
-	return data.publicUrl;
+  console.log("kl", data);
+
+  return data.publicUrl;
 };
 
 export const deleteFile = async (filename: string) => {
-	try {
-		const { data, error } = await supabase.storage
-			.from("ImageUpload")
-			.remove([`public/airplanes/${filename}`]);
+  try {
+    const { data, error } = await supabase.storage
+      .from("ImageUpload")
+      .remove([`public/airplanes/${filename}`]);
 
-		if (error) {
-			throw new Error(error.message);
-		}
+    if (error) {
+      throw new Error(error.message);
+    }
 
-		return data;
-	} catch (error) {
-		console.log(error);
+    return data;
+  } catch (error) {
+    console.log(error);
 
-		return error;
-	}
+    return error;
+  }
 };

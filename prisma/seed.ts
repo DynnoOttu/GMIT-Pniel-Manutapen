@@ -1,30 +1,64 @@
-const {PrismaClient} = require('@prisma/client')
-const bcrypt = require('bcrypt');
+const { PrismaClient } = require("@prisma/client");
+const bcrypt = require("bcrypt");
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
+  const password = bcrypt.hashSync("admin123", 10);
 
-    const password = bcrypt.hashSync("admin123", 10)
+  const users = [
+    {
+      name: "Super Admin",
+      email: "admin@gmitpniel.com",
+      password,
+      role: "ADMIN",
+      isActive: true,
+    },
+    {
+      name: "Admin Multimedia",
+      email: "multimedia@gmitpniel.com",
+      password,
+      role: "ADMIN",
+      isActive: true,
+    },
+    {
+      name: "Admin Pelayanan",
+      email: "pelayanan@gmitpniel.com",
+      password,
+      role: "ADMIN",
+      isActive: true,
+    },
+  ];
 
-    const userSeed = await prisma.user.create({
-        data: {
-            email: "admin@mail.com",
-            name: "Admin",
-            role: "ADMIN",
-            password
-        }
-    })
+  for (const user of users) {
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email: user.email,
+      },
+    });
 
-    console.log({userSeed});
+    if (!existingUser) {
+      const createdUser = await prisma.user.create({
+        data: user,
+      });
+
+      console.log(`User created: ${createdUser.email}`);
+    } else {
+      console.log(`User already exists: ${existingUser.email}`);
+    }
+  }
+
+  console.log("Seed user completed");
 }
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+    console.error(e);
+
+    await prisma.$disconnect();
+
+    process.exit(1);
+  });
