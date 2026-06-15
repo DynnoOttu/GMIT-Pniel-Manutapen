@@ -7,7 +7,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import DeletePreacher from "./delete-preacher";
+import DeletePreacher from "./delete-airplane";
 
 export const columns: ColumnDef<Preacher>[] = [
   {
@@ -15,8 +15,6 @@ export const columns: ColumnDef<Preacher>[] = [
     header: "Photo",
     cell: ({ row }) => {
       const preacher = row.original;
-      console.log("preacher.photoUrl", preacher.photoUrl);
-
       return (
         <Image
           src={
@@ -75,7 +73,7 @@ export const columns: ColumnDef<Preacher>[] = [
             </Link>
           </Button>
 
-          {/* <DeletePreacher id={preacher.id} /> */}
+          <DeletePreacher id={preacher.id} />
         </div>
       );
     },

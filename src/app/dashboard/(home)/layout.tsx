@@ -60,6 +60,16 @@ export default async function DashboardLayout({
                     Pengkhotbah
                   </Link>
                 </Button>
+                <Button
+                  variant={"ghost"}
+                  asChild
+                  className="w-full justify-start"
+                >
+                  <Link href={"/dashboard/kebaktian"}>
+                    <User className="mr-2 w-4 h-4" />
+                    Kebaktian Utama
+                  </Link>
+                </Button>
                 {/* <Button
                   variant={"ghost"}
                   asChild

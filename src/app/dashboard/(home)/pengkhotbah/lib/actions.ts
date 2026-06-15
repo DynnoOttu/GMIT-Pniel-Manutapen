@@ -87,8 +87,8 @@ export async function savePreacher(
     };
   }
 
-  revalidatePath("/dashboard/preachers");
-  redirect("/dashboard/preachers");
+  revalidatePath("/dashboard/pengkhotbah");
+  redirect("/dashboard/pengkhotbah");
 }
 
 export async function updatePreacher(
@@ -223,5 +223,5 @@ export async function deletePreacher(
     };
   }
 
-  revalidatePath("/dashboard/preachers");
+  revalidatePath("/dashboard/pengkhotbah");
 }

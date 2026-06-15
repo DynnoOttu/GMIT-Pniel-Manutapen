@@ -55,7 +55,6 @@ model User {
 
   announcements  Announcement[]
   devotionals    Devotional[]
-  churchServices ChurchService[] @relation("ServiceCreatedBy")
   events         Event[]
   sessions Session[]
 }
@@ -221,9 +220,6 @@ model ChurchService {
   // RELATION
   //
 
-  createdById       String
-
-  createdBy         User @relation("ServiceCreatedBy", fields: [createdById], references: [id])
   preacher   Preacher @relation(fields: [preacherId], references: [id])
 }
 
