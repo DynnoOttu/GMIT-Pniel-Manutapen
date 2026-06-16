@@ -1,13 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import NavbarAuth from "./navbar-auth";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { DropdownMenu } from "./dropdown-menu";
 
 export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <nav
       id="Navbar"
-      className="container max-w-[1130px] mx-auto flex justify-between items-center pt-[30px]"
+      className="container max-w-[1130px] mx-auto flex justify-between items-center pt-[30px] relative"
     >
       <Link href="/" className="flex items-center shrink-0">
         <Image
@@ -17,36 +22,30 @@ export default function Navbar() {
           alt="logo"
           className="rounded-full object-cover"
         />
-        {/* <h1 className="font-semibold text-1xl ml-2">GMIT Pniel Manutapen</h1> */}
       </Link>
-      {/* <ul className="nav-menus flex gap-[30px] items-center w-fit">
-        <li>
-          <Link href="" className="font-medium">
-            Flash Sale h
-          </Link>
-        </li>
-        <li>
-          <Link href="" className="font-medium">
-            Discover
-          </Link>
-        </li>
-        <li>
-          <Link href="" className="font-medium">
-            Packages
-          </Link>
-        </li>
-        <li>
-          <Link href="" className="font-medium">
-            Stories
-          </Link>
-        </li>
-        <li>
-          <Link href="" className="font-medium">
-            About
-          </Link>
-        </li>
-        <NavbarAuth />
-      </ul> */}
+
+      {/* Desktop */}
+      <ul className="hidden md:flex gap-[30px] items-center">
+        <DropdownMenu />
+      </ul>
+
+      {/* Hamburger */}
+      <button
+        className="md:hidden text-white"
+        onClick={() => setMobileOpen(!mobileOpen)}
+        aria-label="Toggle menu"
+      >
+        {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {/* Mobile panel */}
+      {mobileOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 mt-4 bg-white rounded-2xl shadow-2xl border border-[#ECE8FF] px-6 py-5 z-50">
+          <ul className="flex flex-col gap-2">
+            <DropdownMenu onClose={() => setMobileOpen(false)} />
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }

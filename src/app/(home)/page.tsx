@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../components/navbar";
+import PengumumanModal from "../components/pengumuman";
 
 export default function HomePage() {
   const upcomingService = {
@@ -64,8 +65,43 @@ export default function HomePage() {
     "/assets/images/gallery/pniel-manutapen-4.jpg",
   ];
 
+  const pengumuman = [
+    {
+      id: 1,
+      title: "Persekutuan Pemuda Jumat",
+      description:
+        "Persekutuan pemuda dilaksanakan setiap hari Jumat pukul 19.00 WITA di Gedung Serba Guna gereja. Seluruh pemuda-pemudi jemaat diundang untuk hadir.",
+    },
+    {
+      id: 2,
+      title: "Latihan Paduan Suara",
+      description:
+        "Latihan paduan suara dilaksanakan setiap Sabtu pukul 17.00 WITA. Bagi anggota paduan suara diharapkan hadir tepat waktu.",
+    },
+    {
+      id: 3,
+      title: "Pelayanan Diakonia",
+      description:
+        "Bagi jemaat yang ingin terlibat dalam pelayanan diakonia, silakan menghubungi sekretariat gereja atau admin jemaat.",
+    },
+    {
+      id: 4,
+      title: "Ibadah Keluarga Rabu",
+      description:
+        "Ibadah keluarga dilaksanakan setiap Rabu pukul 18.30 WITA. Jemaat diharapkan membawa Alkitab masing-masing.",
+    },
+    {
+      id: 5,
+      title: "Persembahan Pembangunan",
+      description:
+        "Jemaat yang ingin memberikan persembahan khusus untuk pembangunan gedung gereja dapat menyerahkan langsung ke bendahara majelis setiap hari Minggu.",
+    },
+  ];
+
   return (
     <>
+      <PengumumanModal pengumuman={pengumuman} />
+
       {/* HERO */}
       <section className="relative bg-[url('https://res.cloudinary.com/deevvbquc/image/upload/v1778745221/WhatsApp_Image_2025-02-26_at_18.55.39_f9135155_pj0ykk.jpg')] bg-cover bg-center bg-no-repeat text-white">
         <div className="absolute inset-0 bg-gradient-to-r from-[#121212]/90 via-[#121212]/75 to-[#121212]/50" />
@@ -105,42 +141,6 @@ export default function HomePage() {
                 >
                   Renungan Harian
                 </Link>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
-                <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-[24px] p-5">
-                  <p className="text-[#C7BBFF] text-sm">Ibadah Minggu</p>
-
-                  <p className="text-white font-bold text-xl mt-2">
-                    08.00 WITA
-                  </p>
-
-                  <p className="text-gray-300 text-sm mt-1">
-                    Gedung Utama GMIT Pniel
-                  </p>
-                </div>
-
-                <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-[24px] p-5">
-                  <p className="text-[#C7BBFF] text-sm">Tema Minggu Ini</p>
-
-                  <p className="text-white font-bold text-xl mt-2">
-                    Nama Baik Lebih Berharga
-                  </p>
-
-                  <p className="text-gray-300 text-sm mt-1">Amsal 22 : 1</p>
-                </div>
-
-                <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-[24px] p-5">
-                  <p className="text-[#C7BBFF] text-sm">Pelayan Firman</p>
-
-                  <p className="text-white font-bold text-xl mt-2">
-                    Pdt. Dhayana Babys
-                  </p>
-
-                  <p className="text-gray-300 text-sm mt-1">
-                    GMIT Pniel Manutapen
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -275,33 +275,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* PENGUMUMAN */}
-      <section className="bg-white py-[100px]">
-        <div className="container max-w-[1130px] mx-auto flex flex-col gap-10">
-          <div className="text-center">
-            <h2 className="font-bold text-[40px] text-[#121212]">Pengumuman</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {announcements.map((item) => (
-              <div
-                key={item.id}
-                className="bg-[#F7F7FB] border border-[#ECE8FF] rounded-[24px] p-6 hover:shadow-lg transition-all duration-300"
-              >
-                <h3 className="font-bold text-2xl text-[#121212]">
-                  {item.title}
-                </h3>
-
-                <p className="text-gray-600 leading-8 mt-4">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* TENTANG */}
       <section className="bg-[#121212] text-white py-[100px]">
         <div className="container max-w-[1130px] mx-auto flex flex-col gap-10">
